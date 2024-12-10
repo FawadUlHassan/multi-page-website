@@ -22,8 +22,6 @@ pipeline {
                 echo 'Deploying the website...'
                 // Deploy to /var/www/html using sudo to overcome permission issues
                 sh 'sudo cp -r * /var/www/html'
-                // Restart Apache to reflect changes
-                sh 'sudo systemctl restart apache2'
             }
         }
 
