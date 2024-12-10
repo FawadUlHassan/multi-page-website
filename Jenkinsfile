@@ -2,15 +2,21 @@ pipeline {
     agent any
 
     environment {
-        WEB_DIR = "/var/www/html"  // Location where you want to deploy the website
-        SOURCE_DIR = "/home/fawad/multi-page-website/"  // Path to the directory containing your website files
+        WEB_DIR = "/var/www/html"  // Directory to deploy website files
     }
 
     stages {
-        stage('Copy Files') {
+        stage('Clone Repository') {
+            steps {
+                // No credentials needed for public repos
+                git url: 'https://github.com/FawadUlHassan/multi-page-website.git'
+            }
+        }
+
+        stage('Deploy Website') {
             steps {
                 // Copy website files to the web server's directory
-                sh 'cp -r $SOURCE_DIR/* $WEB_DIR/'
+                sh 'cp -r * $WEB_DIR/'
             }
         }
 
