@@ -23,10 +23,8 @@ pipeline {
                     echo 'Deploying website to Apache...'
 
                     // Copy all files from the repository to the Apache server directory
-                    sh '''
-                        cp -r * ${APACHE_DIR}
-                        systemctl restart apache2
-                    '''
+                    sh cp -r * ${APACHE_DIR}
+                    sh systemctl restart apache2
                 }
             }
         }
