@@ -24,8 +24,8 @@ pipeline {
 
                     // Copy all files from the repository to the Apache server directory
                     sh '''
-                        sudo cp -r * ${APACHE_DIR}
-                        sudo systemctl restart apache2
+                        cp -r * ${APACHE_DIR}
+                        systemctl restart apache2
                     '''
                 }
             }
