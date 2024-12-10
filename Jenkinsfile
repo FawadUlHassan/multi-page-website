@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         WEB_DIR = "/var/www/html"  // Location where you want to deploy the website
-        SOURCE_DIR = "/path/to/your/local/website"  // Path to the directory containing your website files
+        SOURCE_DIR = "/home/fawad/multi-page-website/"  // Path to the directory containing your website files
     }
 
     stages {
