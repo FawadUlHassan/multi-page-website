@@ -20,11 +20,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the website...'
-                // Replace this with your deployment strategy
-                // For example, copying files to /var/www/html:
-                sh 'cp -r * /var/www/html'
+                // Deploy to /var/www/html using sudo to overcome permission issues
+                sh 'sudo cp -r * /var/www/html'
+                // Restart Apache to reflect changes
+                sh 'sudo systemctl restart apache2'
             }
         }
+
         stage('Test Website') {
             steps {
                 script {
