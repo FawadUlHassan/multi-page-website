@@ -17,18 +17,14 @@ pipeline {
             }
         }
 
-        stage('Deploy to Apache') {
+        stage('Deploy') {
             steps {
-                script {
-                    echo 'Deploying website to Apache...'
-
-                    // Copy all files from the repository to the Apache server directory
-                    sh cp -r * ${APACHE_DIR}
-                    sh systemctl restart apache2
-                }
+                echo 'Deploying the website...'
+                // Replace this with your deployment strategy
+                // For example, copying files to /var/www/html:
+                sh 'cp -r * /var/www/html'
             }
         }
-
         stage('Test Website') {
             steps {
                 script {
