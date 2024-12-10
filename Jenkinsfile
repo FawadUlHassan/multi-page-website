@@ -12,20 +12,7 @@ pipeline {
                 script {
                     // Clone the GitHub repository
                     echo 'Cloning GitHub repository...'
-                    git 'https://github.com/FawadUlHassan/multi-page-website.git'
-                }
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // If there are any dependencies (e.g., Apache or others), install them
-                    echo 'Installing necessary dependencies...'
-                    sh '''
-                        sudo apt-get update
-                        sudo apt-get install -y apache2
-                    '''
+                    git branch: 'main', url: 'https://github.com/FawadUlHassan/multi-page-website.git'
                 }
             }
         }
