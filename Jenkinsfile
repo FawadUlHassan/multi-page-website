@@ -2,42 +2,23 @@ pipeline {
     agent any
 
     environment {
-        WEB_DIR = "/var/www/html"
+        WEB_DIR = "/var/www/html"  // Location where you want to deploy the website
+        SOURCE_DIR = "/path/to/your/local/website"  // Path to the directory containing your website files
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Copy Files') {
             steps {
-                // Clone the repository from GitHub
-                git 'https://github.com/FawadUlHassan/multi-page-website.git'
+                // Copy website files to the web server's directory
+                sh 'cp -r $SOURCE_DIR/* $WEB_DIR/'
             }
         }
 
-        stage('Build Website') {
+        stage('Restart Apache') {
             steps {
-                // You can add any build steps here if necessary
-                echo 'Building the multi-page website...'
-            }
-        }
-
-        stage('Deploy to Apache') {
-            steps {
-                // Copy website files to Apache server's web root
-                sh 'sudo cp -r * ${WEB_DIR}/'
-
-                // Restart Apache to apply changes
+                // Restart Apache to apply the changes
                 sh 'sudo systemctl restart apache2'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and Deployment completed successfully!'
-        }
-
-        failure {
-            echo 'Build or Deployment failed.'
         }
     }
 }
