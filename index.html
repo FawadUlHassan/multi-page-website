@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>{{title}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-        <nav>
-            <a href="about.html">About</a> | 
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <p>This is the home page with dynamic greetings: {{greeting}}!</p>
-    </main>
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
+    <div id="image-gallery">
+        <!-- Images will be loaded here -->
+    </div>
+    <script>
+        // Fetch dynamic data from JSON
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('h1').textContent = data.title;
+                document.querySelector('p').textContent = data.description;
+
+                const gallery = document.getElementById('image-gallery');
+                data.images.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.style.margin = '10px';
+                    img.style.maxWidth = '90%';
+                    gallery.appendChild(img);
+                });
+            })
+            .catch(err => console.error('Failed to load dynamic content:', err));
+    </script>
 </body>
 </html>
 
